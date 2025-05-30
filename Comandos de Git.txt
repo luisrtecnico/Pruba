@@ -1,0 +1,78 @@
+A3.3 Apéndice C: Comandos de Git - Seguimiento Básico
+Seguimiento Básico
+Para el flujo de trabajo básico de la preparación de contenido y su confirmación a su historia, hay sólo unos pocos comandos básicos.
+
+git add
+El comando git add añade contenido del directorio de trabajo al área de ensayo (staging area o 'index') para la próxima confirmación. Cuando se ejecuta el comando git commit, éste, de forma predeterminada, sólo mira en esta área de ensayo, por lo que git add se utiliza para fabricar exactamente lo que te gustaría fuese tu próxima instantánea a confirmar.
+
+Este comando es un comando increíblemente importante en Git y se menciona o se utiliza docenas de veces en este libro. Vamos a cubrir rápidamente algunos de los usos únicos que se pueden encontrar.
+
+En primer lugar, introducimos y explicamos git add en detalle en Rastrear Archivos Nuevos.
+
+Mostramos como usarlo para resolver conflictos de fusión en Principales Conflictos que Pueden Surgir en las Fusiones.
+
+Repasamos su uso para seguir de forma interactiva sólo partes específicas de un archivo modificado en Organización interactiva.
+
+Por último, lo emulamos en un bajo nivel en Objetos tipo árbol, por lo que podemos tener una idea de lo que está haciendo detrás de escena.
+
+git status
+El comando git status te mostrará los diferentes estados de los archivos en tu directorio de trabajo y área de ensayo. Qué archivos están modificados y sin seguimiento y cuáles con seguimiento pero no confirmados aún. En su forma normal, también te mostrará algunos consejos básicos sobre cómo mover archivos entre estas etapas.
+
+Primero cubrimos status en Revisando el Estado de tus Archivos, tanto en su forma básica como simplificada. Mientras lo utilizamos a lo largo del libro, prácticamente todo lo que puedes hacer con el comando git status está cubierto allí.
+
+git diff
+El comando git diff se utiliza cuando deseas ver las diferencias entre dos árboles. Esto prodría ser la diferencia entre tu entorno de trabajo y tu área de ensayo (git diff por sí mismo), entre tu área de ensayo y tu última confirmación o commit (git diff --staged), o entre dos confirmaciones (git diff master branchB).
+
+En primer lugar, vemos el uso básico de git diff en Ver los Cambios Preparados y No Preparados, donde mostramos cómo ver que cambios tienen seguimiento y cuáles no tienen seguimiento aún.
+
+Lo usamos para buscar posibles problemas con espacios en blanco antes de confirmar con la opción --check en Pautas de confirmación.
+
+Vemos cómo comprobar las diferencias entre ramas de manera más eficaz con la sintaxis git diff A...B en Decidiendo qué introducir.
+
+Lo usamos para filtrar diferencias en espacios en blanco con -w y como comparar diferentes etapas de archivos en conflicto con --theirs, --ours y --base en Fusión Avanzada.
+
+Finalmente, lo usamos para realmente comparar cambios en submódulos con --submodule en Comenzando con los Submódulos.
+
+git difftool
+El comando git difftool simplemente lanza una herramienta externa para mostrar la diferencia entre dos árboles, en caso de que desees utilizar algo que no sea el comando`git diff` incorporado.
+
+Mencionamos sólo brevemente esto en Ver los Cambios Preparados y No Preparados.
+
+git commit
+El comando git commit toma todos los contenidos de los archivos a los que se les realiza el seguimiento con git add y registra una nueva instantánea permanente en la base de datos y luego avanza el puntero de la rama en la rama actual.
+
+En primer lugar, cubrimos los fundamentos en Confirmar tus Cambios. Allí también mostramos cómo utilizar el indicador -a para saltarse el paso git add en los flujos de trabajo diarios y cómo utilizar el indicador -m para pasar un mensaje de confirmación en la línea de comandos en lugar de lanzar un editor.
+
+En Deshacer Cosas cubrimos el uso de la opción --amend para deshacer el commit más reciente.
+
+En ¿Qué es una rama?, entramos en mucho mayor detalle en lo que git commit hace y por qué lo hace así.
+
+Consideramos como firmar criptográficamente commits con el indicador -S en Firmando Commits.
+
+Finalmente, echamos un vistazo a lo que el comando git commit hace en segundo plano y cómo se implementa realmente en Objetos de confirmación de cambios.
+
+git reset
+El comando git reset se utiliza sobre todo para deshacer las cosas, como posiblemente puedes deducir por el verbo. Se mueve alrededor del puntero HEAD y opcionalmente cambia el index o área de ensayo y también puede cambiar opcionalmente el directorio de trabajo si se utiliza --hard. Esta última opción hace posible que este comando pueda perder tu trabajo si se usa incorrectamente, por lo que asegúrese de entenderlo antes de usarlo.
+
+En primer lugar, cubrimos efectivamente el uso más simple de git reset en Deshacer un Archivo Preparado, donde lo usamos para dejar de hacer seguimiento (unstage) de un archivo sobre el que habíamos ejecutado git add.
+
+A continuación, lo cubrimos con bastante detalle en Reiniciar Desmitificado, que está completamente dedicado a la explicación de este comando.
+
+Utilizamos git reset --hard para abortar una fusión en Abortar una Fusión, donde también usamos git merge --abort, el cual es una especie de envoltorio para el comando git reset.
+
+git rm
+El comando git rm se utiliza para eliminar archivos del área de ensayo y el directorio de trabajo para Git. Es similar a git add en que pone en escena una eliminación de un archivo para la próxima confirmación.
+
+Cubrimos el comando git rm con cierto detalle en Eliminar Archivos, incluyendo la eliminación de archivos de forma recursiva y sólo la eliminación de archivos desde el área de ensayo, pero dejándolos en el directorio de trabajo con --cached.
+
+El único otro uso diferente de git rm en el libro está en Borrando objetos, donde utilizamos brevemente y explicamos el --ignore-unmatch al ejecutar git filter-branch, el cual simplemente hace que no salga un error cuando el archivo que estamos tratando de eliminar no existe. Esto puede ser útil para fines de scripting.
+
+git mv
+El comando git mv es un comando de conveniencia para mover un archivo y luego ejecutar git add en el nuevo archivo y git rm en el archivo antiguo.
+
+Sólo mencionamos brevemente este comando en Cambiar el Nombre de los Archivos.
+
+git clean
+El comando git clean se utiliza para eliminar archivos no deseados de tu directorio de trabajo. Esto podría incluir la eliminación de artefactos de construcción temporal o la fusión de archivos en conflicto.
+
+Cubrimos muchas de las opciones y escenarios en 
